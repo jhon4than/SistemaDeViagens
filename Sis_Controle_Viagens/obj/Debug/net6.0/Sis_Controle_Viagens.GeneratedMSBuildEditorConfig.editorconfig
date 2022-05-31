@@ -19,12 +19,52 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Atendimentos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXRlbmRpbWVudG9zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Atendimentos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXRlbmRpbWVudG9zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Atendimentos/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXRlbmRpbWVudG9zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Atendimentos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXRlbmRpbWVudG9zXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Atendimentos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXRlbmRpbWVudG9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Pacotes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjb3Rlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Pacotes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjb3Rlc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Pacotes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjb3Rlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Pacotes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjb3Rlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Pacotes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjb3Rlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jhon4/OneDrive/Documentos/GitHub/Portifolio/SistemaDeViagens/SistemaDeViagens/Sis_Controle_Viagens/Views/Shared/Error.cshtml]
