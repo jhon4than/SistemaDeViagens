@@ -10,102 +10,87 @@ using Sis_Controle_Viagens.Models;
 
 namespace Sis_Controle_Viagens.Controllers
 {
-    public class SuporteUsuariosController : Controller
+    public class LogAuditoriasController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SuporteUsuariosController(ApplicationDbContext context)
+        public LogAuditoriasController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: SuporteUsuarios
+        // GET: LogAuditorias
         public async Task<IActionResult> Index()
         {
-              return _context.SuporteUsuarios != null ? 
-                          View(await _context.SuporteUsuarios
-                          .AsNoTracking()
-                          .Where(x => x.User == User.Identity.Name)
-                          .ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.SuporteUsuarios'  is null.");
+              return _context.LogAuditoria != null ? 
+                          View(await _context.LogAuditoria.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.LogAuditoria'  is null.");
         }
 
-        // GET: SuporteUsuarios/Details/5
+        // GET: LogAuditorias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.SuporteUsuarios == null)
+            if (id == null || _context.LogAuditoria == null)
             {
                 return NotFound();
             }
 
-            var suporteUsuario = await _context.SuporteUsuarios
+            var logAuditoria = await _context.LogAuditoria
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (suporteUsuario == null)
+            if (logAuditoria == null)
             {
                 return NotFound();
             }
 
-            if (suporteUsuario.User != User.Identity.Name)
-            {
-                return NotFound();
-            }
-
-            return View(suporteUsuario);
+            return View(logAuditoria);
         }
 
-        // GET: SuporteUsuarios/Create
+        // GET: LogAuditorias/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: SuporteUsuarios/Create
+        // POST: LogAuditorias/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Duvida")] SuporteUsuario suporteUsuario)
+        public async Task<IActionResult> Create([Bind("Id,DetalhesAuditoria,EmailUsuario")] LogAuditoria logAuditoria)
         {
             if (ModelState.IsValid)
             {
-                suporteUsuario.User = User.Identity.Name;
-                _context.Add(suporteUsuario);
+                _context.Add(logAuditoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(suporteUsuario);
+            return View(logAuditoria);
         }
 
-        // GET: SuporteUsuarios/Edit/5
+        // GET: LogAuditorias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.SuporteUsuarios == null)
+            if (id == null || _context.LogAuditoria == null)
             {
                 return NotFound();
             }
 
-            var suporteUsuario = await _context.SuporteUsuarios.FindAsync(id);
-            if (suporteUsuario == null)
+            var logAuditoria = await _context.LogAuditoria.FindAsync(id);
+            if (logAuditoria == null)
             {
                 return NotFound();
             }
-
-            if (suporteUsuario.User != User.Identity.Name)
-            {
-                return NotFound();
-            }
-
-            return View(suporteUsuario);
+            return View(logAuditoria);
         }
 
-        // POST: SuporteUsuarios/Edit/5
+        // POST: LogAuditorias/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Duvida,User")] SuporteUsuario suporteUsuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DetalhesAuditoria,EmailUsuario")] LogAuditoria logAuditoria)
         {
-            if (id != suporteUsuario.Id)
+            if (id != logAuditoria.Id)
             {
                 return NotFound();
             }
@@ -114,13 +99,12 @@ namespace Sis_Controle_Viagens.Controllers
             {
                 try
                 {
-                    suporteUsuario.User = User.Identity.Name;
-                    _context.Update(suporteUsuario);
+                    _context.Update(logAuditoria);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SuporteUsuarioExists(suporteUsuario.Id))
+                    if (!LogAuditoriaExists(logAuditoria.Id))
                     {
                         return NotFound();
                     }
@@ -131,54 +115,49 @@ namespace Sis_Controle_Viagens.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(suporteUsuario);
+            return View(logAuditoria);
         }
 
-        // GET: SuporteUsuarios/Delete/5
+        // GET: LogAuditorias/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.SuporteUsuarios == null)
+            if (id == null || _context.LogAuditoria == null)
             {
                 return NotFound();
             }
 
-            var suporteUsuario = await _context.SuporteUsuarios
+            var logAuditoria = await _context.LogAuditoria
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (suporteUsuario == null)
+            if (logAuditoria == null)
             {
                 return NotFound();
             }
 
-            if (suporteUsuario.User != User.Identity.Name)
-            {
-                return NotFound();
-            }
-
-            return View(suporteUsuario);
+            return View(logAuditoria);
         }
 
-        // POST: SuporteUsuarios/Delete/5
+        // POST: LogAuditorias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.SuporteUsuarios == null)
+            if (_context.LogAuditoria == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.SuporteUsuarios'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.LogAuditoria'  is null.");
             }
-            var suporteUsuario = await _context.SuporteUsuarios.FindAsync(id);
-            if (suporteUsuario != null)
+            var logAuditoria = await _context.LogAuditoria.FindAsync(id);
+            if (logAuditoria != null)
             {
-                _context.SuporteUsuarios.Remove(suporteUsuario);
+                _context.LogAuditoria.Remove(logAuditoria);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SuporteUsuarioExists(int id)
+        private bool LogAuditoriaExists(int id)
         {
-          return (_context.SuporteUsuarios?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.LogAuditoria?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

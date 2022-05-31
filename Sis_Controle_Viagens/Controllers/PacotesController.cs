@@ -24,12 +24,19 @@ namespace Sis_Controle_Viagens.Controllers
         // GET: Pacotes
         public async Task<IActionResult> Index()
         {
-              return _context.Pacotes != null ? 
-                          View(await _context.Pacotes
-                          .AsNoTracking()
-                          .Where(x=>x.User == User.Identity.Name)
-                          .ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Pacotes'  is null.");
+            _context.LogAuditoria.Add(
+            new LogAuditoria
+            {
+                EmailUsuario = User.Identity.Name,
+                DetalhesAuditoria = "Entrou na Tela de Listagem de Pacotes."
+            });
+            _context.SaveChanges();
+            return _context.Pacotes != null ?
+                        View(await _context.Pacotes
+                        .AsNoTracking()
+                        .Where(x => x.User == User.Identity.Name)
+                        .ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Pacotes'  is null.");
         }
 
         // GET: Pacotes/Details/5
@@ -52,12 +59,30 @@ namespace Sis_Controle_Viagens.Controllers
                 return NotFound();
             }
 
+            _context.LogAuditoria.Add(
+            new LogAuditoria
+            {
+                EmailUsuario = User.Identity.Name,
+                DetalhesAuditoria = string.Concat("Entrou na tela de Detalhes do Pacote: ",
+                pacote.Id, " - ", pacote.Nome)
+            });
+            _context.SaveChanges();
+
             return View(pacote);
         }
 
         // GET: Pacotes/Create
         public IActionResult Create()
         {
+            _context.LogAuditoria.Add(
+            new LogAuditoria
+            {
+                EmailUsuario = User.Identity.Name,
+                DetalhesAuditoria = "Entrou na tela de Cadastro de Pacote."
+            });
+
+            _context.SaveChanges();
+
             return View();
         }
 
@@ -73,6 +98,17 @@ namespace Sis_Controle_Viagens.Controllers
                 pacote.User = User.Identity.Name;
                 _context.Add(pacote);
                 await _context.SaveChangesAsync();
+
+                _context.LogAuditoria.Add(
+                new LogAuditoria
+                {
+                    EmailUsuario = User.Identity.Name,
+                    DetalhesAuditoria = String.Concat("Cadastrou o Pacote: ",
+                    pacote.Nome, " Data de cadastro: ", DateTime.Now.ToLongTimeString())
+                });
+
+                _context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(pacote);
@@ -92,11 +128,19 @@ namespace Sis_Controle_Viagens.Controllers
                 return NotFound();
             }
 
+            _context.LogAuditoria.Add(
+            new LogAuditoria
+            {
+                EmailUsuario = User.Identity.Name,
+                DetalhesAuditoria = string.Concat("Entrou na tela de Edição do Pacote: ",
+                pacote.Id, " - ", pacote.Nome)
+            });
+            _context.SaveChanges();
+
             if (pacote.User != User.Identity.Name)
             {
                 return NotFound();
             }
-
             return View(pacote);
         }
 
@@ -105,7 +149,7 @@ namespace Sis_Controle_Viagens.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Origem,Destino,Saida,Retorno,Preco,User")] Pacote pacote)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Origem,Destino,Saida,Retorno,Preco")] Pacote pacote)
         {
             if (id != pacote.Id)
             {
@@ -116,8 +160,19 @@ namespace Sis_Controle_Viagens.Controllers
             {
                 try
                 {
+                    pacote.User = User.Identity.Name;
                     _context.Update(pacote);
                     await _context.SaveChangesAsync();
+
+                    _context.LogAuditoria.Add(
+                new LogAuditoria
+                {
+                    EmailUsuario = User.Identity.Name,
+                    DetalhesAuditoria = String.Concat("Atualizou o Pacote: ",
+                    pacote.Nome, " Data de Atualização: ", DateTime.Now.ToLongTimeString())
+                });
+                    _context.SaveChanges();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -155,6 +210,15 @@ namespace Sis_Controle_Viagens.Controllers
                 return NotFound();
             }
 
+            _context.LogAuditoria.Add(
+            new LogAuditoria
+            {
+                EmailUsuario = User.Identity.Name,
+                DetalhesAuditoria = string.Concat("Entrou na tela de Exclusão do Pacote: ",
+                pacote.Id, " - ", pacote.Nome)
+            });
+            _context.SaveChanges();
+
             return View(pacote);
         }
 
@@ -172,14 +236,24 @@ namespace Sis_Controle_Viagens.Controllers
             {
                 _context.Pacotes.Remove(pacote);
             }
-            
+
             await _context.SaveChangesAsync();
+
+            _context.LogAuditoria.Add(
+                new LogAuditoria
+                {
+                    EmailUsuario = User.Identity.Name,
+                    DetalhesAuditoria = String.Concat("Deletou o Pacote: ",
+                    pacote.Nome," Data de exclusão: ", DateTime.Now.ToLongTimeString())
+                });
+            _context.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool PacoteExists(int id)
         {
-          return (_context.Pacotes?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Pacotes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
