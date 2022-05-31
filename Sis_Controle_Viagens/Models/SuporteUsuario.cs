@@ -2,9 +2,9 @@
 
 namespace Sis_Controle_Viagens.Models
 {
-    public class Atendimento
+    public class SuporteUsuario
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Campo Nome Obrigatório!")]
         public string Nome { get; set; }
@@ -12,6 +12,6 @@ namespace Sis_Controle_Viagens.Models
         [Required(ErrorMessage = "Campo Dúvida Obrigatório!")]
         public string Duvida { get; set; }
 
-        public string User { get; set; }
+        public string? User { get; set; }
     }
 }

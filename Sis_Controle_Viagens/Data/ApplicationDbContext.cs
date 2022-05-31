@@ -11,7 +11,7 @@ namespace Sis_Controle_Viagens.Data
         {
         }
 
-        public DbSet<Atendimento> Atendimentos { get; set; }
         public DbSet<Pacote> Pacotes { get; set; }
+        public DbSet<SuporteUsuario> SuporteUsuarios { get; set; }
     }
 }

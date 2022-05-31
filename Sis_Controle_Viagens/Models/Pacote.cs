@@ -25,6 +25,6 @@ namespace Sis_Controle_Viagens.Models
         [Required(ErrorMessage = "Preço Obrigatório!")]
         public double Preco { get; set; }
 
-        public string User { get; set; }
+        public string? User { get; set; }
     }
 }

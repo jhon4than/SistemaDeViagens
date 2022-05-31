@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,103 +10,102 @@ using Sis_Controle_Viagens.Models;
 
 namespace Sis_Controle_Viagens.Controllers
 {
-    [Authorize]
-    public class PacotesController : Controller
+    public class SuporteUsuariosController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public PacotesController(ApplicationDbContext context)
+        public SuporteUsuariosController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Pacotes
+        // GET: SuporteUsuarios
         public async Task<IActionResult> Index()
         {
-              return _context.Pacotes != null ? 
-                          View(await _context.Pacotes
+              return _context.SuporteUsuarios != null ? 
+                          View(await _context.SuporteUsuarios
                           .AsNoTracking()
-                          .Where(x=>x.User == User.Identity.Name)
+                          .Where(x => x.User == User.Identity.Name)
                           .ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Pacotes'  is null.");
+                          Problem("Entity set 'ApplicationDbContext.SuporteUsuarios'  is null.");
         }
 
-        // GET: Pacotes/Details/5
+        // GET: SuporteUsuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Pacotes == null)
+            if (id == null || _context.SuporteUsuarios == null)
             {
                 return NotFound();
             }
 
-            var pacote = await _context.Pacotes
+            var suporteUsuario = await _context.SuporteUsuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (pacote == null)
+            if (suporteUsuario == null)
             {
                 return NotFound();
             }
 
-            if (pacote.User != User.Identity.Name)
+            if (suporteUsuario.User != User.Identity.Name)
             {
                 return NotFound();
             }
 
-            return View(pacote);
+            return View(suporteUsuario);
         }
 
-        // GET: Pacotes/Create
+        // GET: SuporteUsuarios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Pacotes/Create
+        // POST: SuporteUsuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Origem,Destino,Saida,Retorno,Preco")] Pacote pacote)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Duvida,User")] SuporteUsuario suporteUsuario)
         {
             if (ModelState.IsValid)
             {
-                pacote.User = User.Identity.Name;
-                _context.Add(pacote);
+                suporteUsuario.User = User.Identity.Name;
+                _context.Add(suporteUsuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(pacote);
+            return View(suporteUsuario);
         }
 
-        // GET: Pacotes/Edit/5
+        // GET: SuporteUsuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Pacotes == null)
+            if (id == null || _context.SuporteUsuarios == null)
             {
                 return NotFound();
             }
 
-            var pacote = await _context.Pacotes.FindAsync(id);
-            if (pacote == null)
+            var suporteUsuario = await _context.SuporteUsuarios.FindAsync(id);
+            if (suporteUsuario == null)
             {
                 return NotFound();
             }
 
-            if (pacote.User != User.Identity.Name)
+            if (suporteUsuario.User != User.Identity.Name)
             {
                 return NotFound();
             }
 
-            return View(pacote);
+            return View(suporteUsuario);
         }
 
-        // POST: Pacotes/Edit/5
+        // POST: SuporteUsuarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Origem,Destino,Saida,Retorno,Preco,User")] Pacote pacote)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Duvida,User")] SuporteUsuario suporteUsuario)
         {
-            if (id != pacote.Id)
+            if (id != suporteUsuario.Id)
             {
                 return NotFound();
             }
@@ -116,12 +114,12 @@ namespace Sis_Controle_Viagens.Controllers
             {
                 try
                 {
-                    _context.Update(pacote);
+                    _context.Update(suporteUsuario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PacoteExists(pacote.Id))
+                    if (!SuporteUsuarioExists(suporteUsuario.Id))
                     {
                         return NotFound();
                     }
@@ -132,54 +130,54 @@ namespace Sis_Controle_Viagens.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(pacote);
+            return View(suporteUsuario);
         }
 
-        // GET: Pacotes/Delete/5
+        // GET: SuporteUsuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Pacotes == null)
+            if (id == null || _context.SuporteUsuarios == null)
             {
                 return NotFound();
             }
 
-            var pacote = await _context.Pacotes
+            var suporteUsuario = await _context.SuporteUsuarios
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (pacote == null)
+            if (suporteUsuario == null)
             {
                 return NotFound();
             }
 
-            if (pacote.User != User.Identity.Name)
+            if (suporteUsuario.User != User.Identity.Name)
             {
                 return NotFound();
             }
 
-            return View(pacote);
+            return View(suporteUsuario);
         }
 
-        // POST: Pacotes/Delete/5
+        // POST: SuporteUsuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Pacotes == null)
+            if (_context.SuporteUsuarios == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Pacotes'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.SuporteUsuarios'  is null.");
             }
-            var pacote = await _context.Pacotes.FindAsync(id);
-            if (pacote != null)
+            var suporteUsuario = await _context.SuporteUsuarios.FindAsync(id);
+            if (suporteUsuario != null)
             {
-                _context.Pacotes.Remove(pacote);
+                _context.SuporteUsuarios.Remove(suporteUsuario);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PacoteExists(int id)
+        private bool SuporteUsuarioExists(int id)
         {
-          return (_context.Pacotes?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.SuporteUsuarios?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
