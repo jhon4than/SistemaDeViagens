@@ -64,7 +64,7 @@ namespace Sis_Controle_Viagens.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Duvida,User")] SuporteUsuario suporteUsuario)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Duvida")] SuporteUsuario suporteUsuario)
         {
             if (ModelState.IsValid)
             {
