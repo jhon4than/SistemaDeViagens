@@ -28,7 +28,7 @@ namespace Sis_Controle_Viagens.Controllers
             new LogAuditoria
             {
                 EmailUsuario = User.Identity.Name,
-                DetalhesAuditoria = "Entrou na Tela de Listagem de Pacotes."
+                DetalhesAuditoria = String.Concat("Entrou na Tela de Listagem de Pacotes. - ", DateTime.Now.ToString())
             });
             _context.SaveChanges();
             return _context.Pacotes != null ?
@@ -64,7 +64,7 @@ namespace Sis_Controle_Viagens.Controllers
             {
                 EmailUsuario = User.Identity.Name,
                 DetalhesAuditoria = string.Concat("Entrou na tela de Detalhes do Pacote: ",
-                pacote.Id, " - ", pacote.Nome)
+                pacote.Id, " - ", pacote.Nome, " - " , DateTime.Now.ToString())
             });
             _context.SaveChanges();
 
@@ -78,7 +78,7 @@ namespace Sis_Controle_Viagens.Controllers
             new LogAuditoria
             {
                 EmailUsuario = User.Identity.Name,
-                DetalhesAuditoria = "Entrou na tela de Cadastro de Pacote."
+                DetalhesAuditoria = String.Concat("Entrou na tela de Cadastro de Pacote. - ", DateTime.Now.ToString())
             });
 
             _context.SaveChanges();
@@ -104,7 +104,7 @@ namespace Sis_Controle_Viagens.Controllers
                 {
                     EmailUsuario = User.Identity.Name,
                     DetalhesAuditoria = String.Concat("Cadastrou o Pacote: ",
-                    pacote.Nome, " Data de cadastro: ", DateTime.Now.ToLongTimeString())
+                    pacote.Nome, " Data de cadastro: - ", DateTime.Now.ToString())
                 });
 
                 _context.SaveChanges();
@@ -133,7 +133,7 @@ namespace Sis_Controle_Viagens.Controllers
             {
                 EmailUsuario = User.Identity.Name,
                 DetalhesAuditoria = string.Concat("Entrou na tela de Edição do Pacote: ",
-                pacote.Id, " - ", pacote.Nome)
+                pacote.Id, " - ", pacote.Nome, " - ", DateTime.Now.ToString())
             });
             _context.SaveChanges();
 
@@ -169,7 +169,7 @@ namespace Sis_Controle_Viagens.Controllers
                 {
                     EmailUsuario = User.Identity.Name,
                     DetalhesAuditoria = String.Concat("Atualizou o Pacote: ",
-                    pacote.Nome, " Data de Atualização: ", DateTime.Now.ToLongTimeString())
+                    pacote.Nome, " Data de Atualização: - ", DateTime.Now.ToString())
                 });
                     _context.SaveChanges();
 
@@ -215,7 +215,7 @@ namespace Sis_Controle_Viagens.Controllers
             {
                 EmailUsuario = User.Identity.Name,
                 DetalhesAuditoria = string.Concat("Entrou na tela de Exclusão do Pacote: ",
-                pacote.Id, " - ", pacote.Nome)
+                pacote.Id, " - ", pacote.Nome, " - ", DateTime.Now.ToString())
             });
             _context.SaveChanges();
 
@@ -244,7 +244,7 @@ namespace Sis_Controle_Viagens.Controllers
                 {
                     EmailUsuario = User.Identity.Name,
                     DetalhesAuditoria = String.Concat("Deletou o Pacote: ",
-                    pacote.Nome," Data de exclusão: ", DateTime.Now.ToLongTimeString())
+                    pacote.Nome," Data de exclusão: - ", DateTime.Now.ToString())
                 });
             _context.SaveChanges();
 
