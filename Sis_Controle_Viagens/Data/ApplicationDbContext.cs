@@ -14,5 +14,6 @@ namespace Sis_Controle_Viagens.Data
         public DbSet<Pacote> Pacotes { get; set; }
         public DbSet<SuporteUsuario> SuporteUsuarios { get; set; }
         public DbSet<Sis_Controle_Viagens.Models.LogAuditoria>? LogAuditoria { get; set; }
+        public DbSet<Block> blocks { get; set; }
     }
 }

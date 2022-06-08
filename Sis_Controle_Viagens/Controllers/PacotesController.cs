@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Sis_Controle_Viagens.Biblioteca;
 using Sis_Controle_Viagens.Data;
 using Sis_Controle_Viagens.Models;
 
@@ -16,6 +18,8 @@ namespace Sis_Controle_Viagens.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        public int Height { get; private set; }
+
         public PacotesController(ApplicationDbContext context)
         {
             _context = context;
@@ -24,6 +28,7 @@ namespace Sis_Controle_Viagens.Controllers
         // GET: Pacotes
         public async Task<IActionResult> Index()
         {
+       
             _context.LogAuditoria.Add(
             new LogAuditoria
             {
@@ -31,6 +36,7 @@ namespace Sis_Controle_Viagens.Controllers
                 DetalhesAuditoria = String.Concat("Entrou na Tela de Listagem de Pacotes. - ", DateTime.Now.ToString())
             });
             _context.SaveChanges();
+
             return _context.Pacotes != null ?
                         View(await _context.Pacotes
                         .AsNoTracking()
@@ -65,6 +71,16 @@ namespace Sis_Controle_Viagens.Controllers
                 EmailUsuario = User.Identity.Name,
                 DetalhesAuditoria = string.Concat("Entrou na tela de Detalhes do Pacote: ",
                 pacote.Id, " - ", pacote.Nome, " - " , DateTime.Now.ToString())
+            });
+           
+            _context.blocks.Add(new Block
+            {
+                TimeStamp = DateTime.Now.Ticks,
+                Contract = "Entrou na Tela de Listagem de Pacotes.",
+                Creator = User.Identity.Name,
+                PrevHash = pacote.Nome.ConvertToBytes(),
+                Hash = pacote.Nome.ConvertToBytes(),
+                Nonce = "",
             });
             _context.SaveChanges();
 
